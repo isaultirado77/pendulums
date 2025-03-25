@@ -1,5 +1,6 @@
 import numpy as np
-from simulation import Mass
+from simutils import Mass
+
 
 class SimplePendulum:
     def __init__(self, mass, length, theta0, omega0, g=9.81):
