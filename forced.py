@@ -39,3 +39,6 @@ class ForcedPendulum:
     def E_tot(self):
         """Calcula la energía total del péndulo."""
         return self.E_kin() + self.E_pot()
+
+def printhola(): 
+    print("hola")
