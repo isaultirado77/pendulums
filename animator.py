@@ -29,11 +29,11 @@ class Animator:
         self.ax.plot(0, 0, 'ko', markersize=10)
 
         # Dibujar la masa y la línea del péndulo
-        self.line, = self.ax.plot([], [], 'k-', lw=2, marker='o', markerfacecolor='red', markeredgecolor='red')
+        self.line, = self.ax.plot([], [], 'ro-', lw=2, markersize=8)  
         
         # Si draw_trace es True, dibuja la trayectoria de la masa
         if self.draw_trace:
-            self.trace, = self.ax.plot([], [], 'r-', alpha=0.5)
+            self.trace, = self.ax.plot([], [], 'r-', alpha=0.3)
 
     def compute_cartesian_coords(self):
         """Convierte coordenadas angulares a cartesianas."""
