@@ -1,4 +1,4 @@
-import os
+import os, argparse
 import numpy as np
 
 class ElasticPendulum:
@@ -55,23 +55,23 @@ def simulate_elastic_pendulum(pendulum, t_max, dt, filename="elastic_pendulum_da
 
     print(f"Simulación completada. Datos guardados en {filepath}")
 
-def main():
-    # Parámetros del sistema
-    mass = 1.0
-    l0 = 1.0      # Longitud natural del resorte
-    k = 5.0       # Constante elástica
-    theta0 = np.pi / 4
-    omega0 = 0.1
-    l_init = 1.2  # Longitud inicial del resorte (ligeramente estirado)
-    v_init = 0.0  # Velocidad inicial del resorte
-
-    # Parámetros de simulación
-    dt = 0.01
-    t_max = 10.0
-    filename = "test_elastic_pendulum"
-
+def main(mass=1.0, l0=1.0, k=10.0, theta0=np.pi/4, omega0=0.1, l_init=1.2, v_init=0.0, dt=0.01, t_max=10.0, filename="elastic_pendulum"):
     pendulum = ElasticPendulum(mass, l0, k, theta0, omega0, l_init, v_init)
     simulate_elastic_pendulum(pendulum, t_max, dt, filename)
 
+
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Simulador de péndulo elástico usando Runge-Kutta de 4to orden.")
+    parser.add_argument("--mass", type=float, default=1.0, help="Masa del péndulo (kg)")
+    parser.add_argument("--l0", type=float, default=1.0, help="Longitud natural del resorte (m)")
+    parser.add_argument("--k", type=float, default=10.0, help="Constante elástica del resorte (N/m)")
+    parser.add_argument("--theta0", type=float, default=np.pi/4, help="Ángulo inicial (radianes)")
+    parser.add_argument("--omega0", type=float, default=0.1, help="Velocidad angular inicial (rad/s)")
+    parser.add_argument("--l_init", type=float, default=1.2, help="Longitud inicial del resorte (m)")
+    parser.add_argument("--v_init", type=float, default=0.0, help="Velocidad inicial de la longitud del resorte (m/s)")
+    parser.add_argument("--dt", type=float, default=0.01, help="Paso de tiempo para la simulación (s)")
+    parser.add_argument("--t_max", type=float, default=10.0, help="Tiempo total de simulación (s)")
+    parser.add_argument("--filename", type=str, default="elastic_pendulum", help="Nombre del archivo de salida")
+    
+    args = parser.parse_args()
+    main(args.mass, args.l0, args.k, args.theta0, args.omega0, args.l_init, args.v_init, args.dt, args.t_max, args.filename)
